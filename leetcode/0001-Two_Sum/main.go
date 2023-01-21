@@ -3,20 +3,16 @@ package main
 import "fmt"
 
 func twoSum(nums []int, target int) []int {
-	m := make(map[int]int)
-    for i, num1 := range nums {
-		res := target - num1
-		// fmt.Printf("i=%d, res=%d\n", i, res)
-		m[res] = i
-	}
-	for j, num2 := range nums {
-		elem, ok := m[num2]
-		// fmt.Printf("elem=%d, ok=%v\n", elem, ok)
-		if ok && j != elem {
-			return []int{j, elem}
-		}
-	}
-	return []int{-1, -1}
+	visited := make(map[int]int, len(nums))
+
+    for i, num := range nums { 
+        rem := target - num
+        if j, found := visited[rem]; found {
+            return []int{i, j}
+        }
+        visited[num] = i
+    }
+    return nil
 }
 
 func main() {
