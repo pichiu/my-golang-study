@@ -1,18 +1,16 @@
 package test
 
 func findJudge(n int, trust [][]int) int {
-	trustPeople := make([]int, n+1)
-	trustByOthers := make([]int, n+1)
-
-	for _, item := range trust {
-		trustPeople[item[0]]++
-		trustByOthers[item[1]]++
-	}
-
-	for i := 1; i <= n; i++ {
-		if trustPeople[i] == 0 && trustByOthers[i] == n-1 {
-			return i
-		}
-	}
-	return -1
+	if n == 1 { return 1 }
+    arr := make([]int, n+1)
+    for _, tru := range(trust) {
+        arr[tru[0]] -= 1
+        arr[tru[1]] += 1
+    }
+    for i, a := range(arr) {
+        if a == n - 1 {
+            return i
+        }
+    }
+    return -1
 }
