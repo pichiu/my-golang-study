@@ -1,31 +1,18 @@
 package test
 
-import "fmt"
-
 func findJudge(n int, trust [][]int) int {
-	if n == 1  && len(trust) == 0 {
-        return 1
-    }
-	type void struct{}
-	var member void
-	townfolks := make(map[int]void)
-	candidates := make(map[int]int)
-    for _, v := range trust {
-		townfolks[v[0]] = member
-		candidates[v[1]]++
+	trustPeople := make([]int, n+1)
+	trustByOthers := make([]int, n+1)
+
+	for _, item := range trust {
+		trustPeople[item[0]]++
+		trustByOthers[item[1]]++
 	}
-	fmt.Println(townfolks, candidates)
-	ret := -1
-	for key, element := range candidates {
-		if _, isExist := townfolks[key]; !isExist {
-			if element == n - 1 {
-				if ret < 0 {
-					ret = key
-				} else {
-					return -1
-				}
-			}
+
+	for i := 1; i <= n; i++ {
+		if trustPeople[i] == 0 && trustByOthers[i] == n-1 {
+			return i
 		}
 	}
-	return ret
+	return -1
 }
