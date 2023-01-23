@@ -1,6 +1,6 @@
 package test
 
-import "fmt"
+// import "fmt"
 
 func removeElement(nums []int, val int) int {
 	p := 0
