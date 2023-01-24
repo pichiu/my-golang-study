@@ -6,34 +6,23 @@ import (
 )
 
 func TestFindJudge(t *testing.T) {
-	// n := 3
-	// trust := [][]int{
-	// 	{1,3},
-	// 	{2,3},
-	// 	{3,1},
-	// }
-	// expectedNum := -1
+	judgeTests := []struct {
+		n           int
+		trust       [][]int
+		expectedNum int
+	}{
+		{3, [][]int{{1, 3}, {2, 3}, {3, 1}}, -1},
+		{4, [][]int{{1, 3}, {1, 4}, {2, 3}, {2, 4}, {4, 3}}, 3},
+		{1, [][]int{}, 1},
+	}
 
-	// n := 4
-	// trust := [][]int{
-	// 	{1,3},
-	// 	{1,4},
-	// 	{2,3},
-	// 	{2,4},
-	// 	{4,3},
-	// }
-	// expectedNum := 3
+	for _, v := range judgeTests {
+		k := findJudge(v.n, v.trust)
 
-	n := 1
-	var trust [][]int
-	expectedNum := 1
-
-
-	k := findJudge(n, trust)
-	
-	if k == expectedNum {
-		t.Log("PASS")
-	} else {
-		t.Error("Expected=", expectedNum, ", wrong answer=", k)
+		if k == v.expectedNum {
+			t.Log("PASS")
+		} else {
+			t.Error("Expected=", v.expectedNum, ", wrong answer=", k)
+		}
 	}
 }
