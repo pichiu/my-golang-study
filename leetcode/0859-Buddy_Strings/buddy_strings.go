@@ -15,7 +15,7 @@ func buddyStrings(s string, goal string) bool {
 		return false
 	}
 	var diff []int
-    for i := 0; i < len(s); i++ {
+	for i := 0; i < len(s); i++ {
 		if s[i] != goal[i] {
 			diff = append(diff, i)
 		}
